@@ -1,0 +1,72 @@
+* {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    /* Firefox */
+    -webkit-box-sizing: border-box;
+    /* Safari */
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #eee;
+    margin-bottom: 80px;
+}
+
+form {
+    background-color: #ccc;
+    margin-top: 30px;
+    padding: 40px;
+}
+
+label {
+    margin-bottom: 10px;
+    display: block;
+    font-weight: bold;
+}
+
+input[type="checkbox"] {
+    transform: scale(2)
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+select,
+textarea {
+    display: block;
+    width: 100%;
+    border: 0;
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+textarea {
+    height: 72px;
+}
+
+input[type="submit"] {
+    background-color: #00AEEF;
+    border: 0;
+    font-weight: bold;
+    color: white;
+    font-size: 14px;
+    padding: 7px 15px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #222;
+}
+
+div#resultados textarea {
+    height: 500px;
+}

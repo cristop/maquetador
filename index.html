@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAQUETADOR</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="assets/booster/booster.min.css" />
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center">GENERADOR DE CÓDIGO PARA BOOSTER.CSS</h1>
+        <h5 class="text-center">by Cristo</h5>
+
+        <div class="text-center">
+            Tipo de ruta para imagenes &nbsp;
+            <select name="tipo-ruta" id="tipo-ruta" style="width: auto; display: inline-block;">
+                <option value="2">HTML</option>
+                <option value="1">October cms</option>
+            </select>
+        </div>
+
+        <form id="generar-section">
+            <h2>Armado de Section</h2>
+            <div class="flex">
+                <div>
+                    <label for="">ID Section (sin #)</label>
+                    <input type="text" name="id_section" id="id_section" required>
+                </div>
+                <div>
+                    <label for="">Tipo Container</label>
+                    <select name="tipo_container" id="tipo_container">
+                        <option value="container">container</option>
+                        <option value="container-fluid">container-fluid</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="">Imagen de fondo?</label>
+                    <input type="checkbox" name="bg" id="bg" />
+                </div>
+                <div>
+                    <label for="">Color de fondo</label>
+                    <select name="bg_color" id="bg_color">
+                        <option value="">- Ninguno -</option>
+                        <option value="bg-primary">bg-primary</option>
+                        <option value="bg-secondary">bg-secondary</option>
+                        <option value="bg-terciary">bg-terciary</option>
+                        <option value="bg-black">bg-black</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="">Color letra base</label>
+                    <select name="c_base" id="c_base">
+                        <option value="">- Ninguno -</option>
+                        <option value="c-white">c-white</option>
+                        <option value="c-primary">c-primary</option>
+                        <option value="c-secondary">c-secondary</option>
+                        <option value="c-terciary">c-terciary</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <hr>
+            </div>
+
+            <div>
+                <h2>Contenido principal</h2>
+            </div>
+
+            <div class="flex">
+                <div>
+                    <label for="">Icono superior?</label>
+                    <input type="checkbox" name="sup_icon" id="sup_icon" />
+                </div>
+                <div>
+                    <label for="">Texto Superior al titulo?</label>
+                    <input type="text" name="sup_titulo" id="sup_titulo" placeholder="- Ninguno -">
+                </div>
+                <div>
+                    <label for="">Titulo</label>
+                    <input type="text" name="titulo" id="titulo" placeholder="- Ninguno -">
+                </div>
+                <div>
+                    <label for="">Subtitulo</label>
+                    <input type="text" name="subtitulo" id="subtitulo" placeholder="- Ninguno -">
+                </div>
+                <div>
+                    <label for="">Texto</label>
+                    <textarea name="texto" id="texto" placeholder="- Ninguno -"></textarea>
+                </div>
+                <div>
+                    <label for="">Imagen?</label>
+                    <input type="checkbox" name="imagen_content" id="imagen_content" /> <br><br>
+
+                    <label for="">Posicion?</label>
+                    <select name="pos_imagen" id="pos_imagen">
+                        <option value="left">Izquierda</option>
+                        <option value="right">Derecha</option>
+                        <option value="center">Al diome</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="">Texto btn</label>
+                    <input type="text" name="btn" id="btn" placeholder="- Ninguno -">
+                </div>
+            </div>
+
+            <div>
+                <hr>
+            </div>
+
+            <div>
+                <h2>Contenido en columnas flex</h2>
+            </div>
+
+            <div class="flex">
+                <div>
+                    <label for="">Cantidad de columnas </label>
+                    <select name="columnas_flex" id="columnas_flex">
+                        <option value="0">- Ninguna -</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="">Icono?</label>
+                    <input type="checkbox" name="icono_flex" id="icono_flex" />
+                </div>
+                <div>
+                    <label for="">Imagen?</label>
+                    <input type="checkbox" name="imagen_flex" id="imagen_flex" />
+                </div>
+                <div>
+                    <label for="">Titulo?</label>
+                    <input type="checkbox" name="titulo_flex" id="titulo_flex" />
+                </div>
+                <div>
+                    <label for="">Subtitulo?</label>
+                    <input type="checkbox" name="subtitulo_flex" id="subtitulo_flex" />
+                </div>
+                <div>
+                    <label for="">texto?</label>
+                    <input type="checkbox" name="texto_flex" id="texto_flex" />
+                </div>
+                <div>
+                    <label for="">btn?</label>
+                    <input type="checkbox" name="btn_flex" id="btn_flex" />
+                </div>
+                <div>
+                    <label for="">Color de fondo?</label>
+                    <input type="text" name="bg_flex" id="bg_flex" placeholder="- Ninguno -">
+                </div>
+            </div>
+
+            <br><br>
+            <div class="flex">
+                <div>
+                    <input type="submit" value="GENERAR">
+                    <input type="reset" value="LIMPIAR">
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="container" id="resultados">
+        <br><br><br>
+        <h2>RESULTADOS: </h2>
+        <div class="flex">
+            <div>
+                <label for="">HTML</label>
+                <textarea name="res-html" id="res-html" cols="30" rows="20" readonly></textarea>
+            </div>
+            <div>
+                <label for="">CSS</label>
+                <textarea name="res-css" id="res-css" cols="30" rows="20" readonly></textarea>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+
+    <script src="assets/js/section.js"></script>
+</body>
+
+</html>

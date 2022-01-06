@@ -22,12 +22,28 @@
         <div class="text-center">
             Tipo de ruta para imagenes &nbsp;
             <select name="tipo-ruta" id="tipo-ruta" style="width: auto; display: inline-block;">
-                <option value="2">HTML</option>
                 <option value="1">October cms</option>
+                <option value="2">HTML</option>
+                <option value="3">Custom</option>
+                <option value="4">Picsum</option>
             </select>
+            <div class="custom-contain" style="display: none;">
+                &nbsp;&nbsp;Escribe la ruta custom &nbsp;&nbsp;<input type="text" id="ruta-custom" name="ruta-custom"
+                    value="assets/img/imagen.jpg" style="width: auto; display: inline-block;" />
+            </div>
+            <label class="webp-contain">
+                <br>
+                <input type="checkbox" name="webp" id="webp" /> &nbsp;&nbsp;Agregar webp
+            </label>
         </div>
 
         <form id="generar-section">
+            <div class="flex sticky">
+                <div>
+                    <input type="submit" value="GENERAR">
+                    <input type="reset" value="LIMPIAR">
+                </div>
+            </div>
             <h2>Armado de Section</h2>
             <div class="flex">
                 <div>
@@ -43,7 +59,13 @@
                 </div>
                 <div>
                     <label for="">Imagen de fondo?</label>
-                    <input type="checkbox" name="bg" id="bg" />
+                    <input type="checkbox" name="bg" id="bg" /> <br><br>
+                    <label for="">Posicion</label>
+                    <select name="bg_position" id="bg_position">
+                        <option value="full">Full</option>
+                        <option value="izquierda">Mitad izquierda</option>
+                        <option value="derecha">Mitad derecha</option>
+                    </select>
                 </div>
                 <div>
                     <label for="">Color de fondo</label>
@@ -147,7 +169,9 @@
                 </div>
                 <div>
                     <label for="">Imagen?</label>
-                    <input type="checkbox" name="imagen_flex" id="imagen_flex" />
+                    <input type="checkbox" name="imagen_flex" id="imagen_flex" /><br><br>
+                    <label for="">con link?</label>
+                    <input type="checkbox" name="imagen_link_flex" id="imagen_link_flex" />
                 </div>
                 <div>
                     <label for="">Titulo?</label>
@@ -170,8 +194,6 @@
                     <input type="text" name="bg_flex" id="bg_flex" placeholder="- Ninguno -">
                 </div>
             </div>
-
-            <br><br>
             <div class="flex">
                 <div>
                     <input type="submit" value="GENERAR">

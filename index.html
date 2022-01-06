@@ -33,15 +33,20 @@
             </div>
             <label class="webp-contain">
                 <br>
-                <input type="checkbox" name="webp" id="webp" /> &nbsp;&nbsp;Agregar webp
+                <input type="checkbox" name="webp" id="webp" checked /> &nbsp;&nbsp;Agregar webp
             </label>
         </div>
 
         <form id="generar-section">
             <div class="flex sticky">
+                <div style="position: absolute; right: 0; padding-top: 16px; width: auto;">
+                    Formato de ruta imagen: <strong id="formato-ruta-imagen"></strong><span style="color:blue;"
+                        id="webp_text"></span>
+                </div>
                 <div>
                     <input type="submit" value="GENERAR">
                     <input type="reset" value="LIMPIAR">
+                    <button data-href="#vista_previa" class="modal-link">VISTA PREVIA</button>
                 </div>
             </div>
             <h2>Armado de Section</h2>
@@ -198,6 +203,7 @@
                 <div>
                     <input type="submit" value="GENERAR">
                     <input type="reset" value="LIMPIAR">
+                    <button data-href="#vista_previa" class="modal-link">VISTA PREVIA</button>
                 </div>
             </div>
         </form>
@@ -218,12 +224,23 @@
             </div>
         </div>
     </div>
+
+
+
+    <div id="vista_previa" class="modal">
+        <div class="previa_css"></div>
+        <div class="previa_html"></div>
+    </div>
+
     <!-- jQuery CDN -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
 
     <script src="assets/js/section.js"></script>
+
+    <!-- Librarys -->
+    <script src="assets/library/modal/modal.js"></script>
 </body>
 
 </html>

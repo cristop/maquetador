@@ -9,28 +9,7 @@ var image_gral = "";
 $(function () {
     //mostrar o quitar el campo custom
     $('#tipo-ruta').on('change', function () {
-        if ($(this).val() == 3) {
-            $('.custom-contain').css('display', 'block');
-        } else {
-            $('.custom-contain').css('display', 'none');
-        }
-    })
-
-    //al enviar armamos el code
-    $('form#generar-section').submit(function () {
-        _html = "";
-        _css = "";
-        _mobile = "";
-
-        //tomamos todos los valores del form y los hacemos variables
-        data = $('form#generar-section').serializeArray().reduce(function (obj, item) {
-            obj[item.name] = item.value;
-            return obj;
-        }, {});
-
-        id_section = 'section#' + data.id_section;
-        tipo_ruta = parseInt($('#tipo-ruta').val());
-
+        tipo_ruta = parseInt($(this).val());
         //aplicar ruta de imagen, una imagen para todo
         switch (tipo_ruta) {
             case 1:
@@ -80,6 +59,42 @@ $(function () {
         }
 
 
+        if ($(this).val() == 3) {
+            $('.custom-contain').css('display', 'block');
+        } else {
+            $('.custom-contain').css('display', 'none');
+        }
+
+        $('#formato-ruta-imagen').text(image_gral);
+        if ($('#webp').is(':checked')) {
+            $('#webp_text').text(' webp');
+        } else {
+            $('#webp_text').text('');
+        }
+    });
+    //aca solo informacion para mostrar si el webp está marcado
+    $('#tipo-ruta').trigger('change');
+    $('#webp').on('click', function () {
+        $('#tipo-ruta').trigger('change');
+    });
+    $('#ruta-custom').on('keyup', function () {
+        $('#tipo-ruta').trigger('change');
+    });
+
+
+    //al enviar armamos el code
+    $('form#generar-section').submit(function () {
+        _html = "";
+        _css = "";
+        _mobile = "";
+
+        //tomamos todos los valores del form y los hacemos variables
+        data = $('form#generar-section').serializeArray().reduce(function (obj, item) {
+            obj[item.name] = item.value;
+            return obj;
+        }, {});
+
+        id_section = 'section#' + data.id_section;
 
         //iniciamos escritura de codigo
         html_abrirSection();

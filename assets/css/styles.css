@@ -79,4 +79,17 @@ div#resultados textarea {
     background-color: #ccc;
 }
 
-.flex.sticky:after {content: "";width: 100%;height: 1px;background-color: #999;display: block;margin-top: 5px;}
+.flex.sticky:after {
+    content: "";
+    width: 100%;
+    height: 1px;
+    background-color: #999;
+    display: block;
+    margin-top: 5px;
+}
+
+.modal {
+    display: none;
+    width: calc(100% + -40px) !important;
+    max-width: 100% !important;
+}

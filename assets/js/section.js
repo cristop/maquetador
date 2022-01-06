@@ -5,6 +5,7 @@ var data = "";
 var id_section = "";
 var tipo_ruta = "";
 var image_gral = "";
+var vista_previa = false;
 
 $(function () {
     //mostrar o quitar el campo custom
@@ -55,7 +56,16 @@ $(function () {
             default:
                 image_gral = "https://picsum.photos/seed/picsum/1800/1000";
 
-                imagen = '<img src="' + image_gral + '" loading="lazy" width="100%" height="100%" alt="" />';
+                if ($('#webp').is(':checked')) {
+                    imagen = "\
+                                <picture>\n\
+                                    <source srcset=\"" + image_gral + ".webp\" type=\"image/webp\">\n\
+                                    <source srcset=\"" + image_gral + "\" type=\"image/jpg\">\n\
+                                    <img src=\"" + image_gral + "\"  loading=\"lazy\" width=\"100%\" height=\"100%\" alt=\"\">\n\
+                                </picture>";
+                } else {
+                    imagen = '<img src="' + image_gral + '" loading="lazy" width="100%" height="100%" alt="" />';
+                }
         }
 
 
@@ -84,30 +94,9 @@ $(function () {
 
     //al enviar armamos el code
     $('form#generar-section').submit(function () {
-        _html = "";
-        _css = "";
-        _mobile = "";
+        vista_previa = false;
 
-        //tomamos todos los valores del form y los hacemos variables
-        data = $('form#generar-section').serializeArray().reduce(function (obj, item) {
-            obj[item.name] = item.value;
-            return obj;
-        }, {});
-
-        id_section = 'section#' + data.id_section;
-
-        //iniciamos escritura de codigo
-        html_abrirSection();
-
-        //if (data.imagen_content) {
-        crear_imagen();
-        /*} else {
-            crear_titulares();
-        }*/
-
-        crear_flex();
-
-        html_cerrarSection();
+        generarCodigo();
 
         //alert(_html);
         imprimirResultados();
@@ -115,7 +104,66 @@ $(function () {
         location.href = "#resultados";
         return false;
     });
+
+    $('.vista_previa_btn').on('click', function () {
+        if ($('#id_section').val() == "") {
+            $('form#generar-section input[\'type="submit"\']').trigger('click');
+        } else {
+            vista_previa = true;
+
+            generarCodigo();
+
+            vistaPrevia();
+        }
+
+        return false;
+    })
 });
+
+
+function generarCodigo() {
+    _html = "";
+    _css = "";
+    _mobile = "";
+
+    //tomamos todos los valores del form y los hacemos variables
+    data = $('form#generar-section').serializeArray().reduce(function (obj, item) {
+        obj[item.name] = item.value;
+        return obj;
+    }, {});
+
+    id_section = 'section#' + data.id_section;
+
+    if (vista_previa) {
+        image_gral = "https://picsum.photos/seed/picsum/1800/1000";
+
+        if ($('#webp').is(':checked')) {
+            imagen = "\
+                        <picture>\n\
+                            <source srcset=\"" + image_gral + ".webp\" type=\"image/webp\">\n\
+                            <source srcset=\"" + image_gral + "\" type=\"image/jpg\">\n\
+                            <img src=\"" + image_gral + "\"  loading=\"lazy\" width=\"100%\" height=\"100%\" alt=\"\">\n\
+                        </picture>";
+        } else {
+            imagen = '<img src="' + image_gral + '" loading="lazy" width="100%" height="100%" alt="" />';
+        }
+    } else {
+        $('#tipo-ruta').trigger('change');
+    }
+
+    //iniciamos escritura de codigo
+    html_abrirSection();
+
+    //if (data.imagen_content) {
+    crear_imagen();
+    /*} else {
+        crear_titulares();
+    }*/
+
+    crear_flex();
+
+    html_cerrarSection();
+}
 
 function html_abrirSection() {
     var style = "";
@@ -128,8 +176,8 @@ function html_abrirSection() {
 
     //css
     _css += id_section + '{\n\
-        padding-top: 100px;\n\
-        padding-bottom: 100px;\n\
+        padding-top: 50px;\n\
+        padding-bottom: 50px;\n\
         position: relative;\n';
     _css += '}\n' + id_section + ' .' + data.tipo_container + '{ \n}\n';
 
@@ -507,3 +555,19 @@ function imprimirResultados() {
     $('#resultados #res-css').val(_css + abrir_mobile + _mobile + cerrar_mobile);
 }
 
+function vistaPrevia() {
+    var abrir_mobile = '@media screen and (max-width:900px){\n';
+    var cerrar_mobile = '}';
+
+    $('#previa_html').html(_html);
+    $('#previa_css').html('<style>' + _css + abrir_mobile + _mobile + cerrar_mobile + '</style>');
+
+    $('#generar-codigo-modal').click(function () {
+        $('.close.close-btn').trigger('click');
+        $('form#generar-section').trigger('submit');
+    });
+
+    $('#cerrar-modal').click(function () {
+        $('.close.close-btn').trigger('click');
+    });
+}

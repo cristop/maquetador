@@ -39,14 +39,15 @@
 
         <form id="generar-section">
             <div class="flex sticky">
-                <div style="position: absolute; right: 0; padding-top: 16px; width: auto;">
+                <div style="position: absolute; right: 0; padding-top: 23px; width: auto;">
                     Formato de ruta imagen: <strong id="formato-ruta-imagen"></strong><span style="color:blue;"
                         id="webp_text"></span>
                 </div>
                 <div>
-                    <input type="submit" value="GENERAR">
-                    <input type="reset" value="LIMPIAR">
-                    <button data-href="#vista_previa" class="modal-link">VISTA PREVIA</button>
+                    <button data-href="#vista_previa" class="modal-link vista_previa_btn btn btn-primary">VISTA
+                        PREVIA</button>
+                    <input type="submit" value="GENERAR" class="btn btn-secondary">
+                    <input type="reset" value="LIMPIAR" class="btn btn-secondary">
                 </div>
             </div>
             <h2>Armado de Section</h2>
@@ -201,9 +202,10 @@
             </div>
             <div class="flex">
                 <div>
-                    <input type="submit" value="GENERAR">
-                    <input type="reset" value="LIMPIAR">
-                    <button data-href="#vista_previa" class="modal-link">VISTA PREVIA</button>
+                    <button data-href="#vista_previa" class="modal-link vista_previa_btn btn btn-primary">VISTA
+                        PREVIA</button>
+                    <input type="submit" value="GENERAR" class="btn btn-secondary">
+                    <input type="reset" value="LIMPIAR" class="btn btn-secondary">
                 </div>
             </div>
         </form>
@@ -228,8 +230,12 @@
 
 
     <div id="vista_previa" class="modal">
-        <div class="previa_css"></div>
-        <div class="previa_html"></div>
+        <div id="previa_css"></div>
+        <div id="previa_html"></div>
+        <div class="panel">
+            <button id="cerrar-modal" class="btn btn-secondary">CERRAR</button>
+            <button id="generar-codigo-modal" class="btn btn-primary">GENERAR CÓDIGO</button>
+        </div>
     </div>
 
     <!-- jQuery CDN -->

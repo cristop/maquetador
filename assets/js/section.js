@@ -304,14 +304,14 @@ function crear_principal() {
         position: relative;\n\
         z-index: 1;\n} \n';
     }
-    if (data.bg_position == "izquierda") {
+    if (data.bg_position == "izquierda" && data.bg) {
         _css += id_section + ' .flex.principal-col{ \n\
         position: relative;\n\
         width: 50%;\n\
         margin-left: auto;\n\
         z-index: 1;\n} \n';
     }
-    if (data.bg_position == "derecha") {
+    if (data.bg_position == "derecha" && data.bg) {
         _css += id_section + ' .flex.principal-col{ \n\
         position: relative;\n\
         width: 50%;\n\

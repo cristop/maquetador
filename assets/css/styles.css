@@ -23,7 +23,7 @@ html {
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #eee;
-    margin-bottom: 80px;
+    /* margin-bottom: 80px; */
 }
 
 form {

@@ -155,7 +155,7 @@ function generarCodigo() {
     html_abrirSection();
 
     //if (data.imagen_content) {
-    crear_imagen();
+    crear_principal();
     /*} else {
         crear_titulares();
     }*/
@@ -239,7 +239,7 @@ function html_cerrarSection() {
 </section> ';
 }
 
-function crear_imagen() {
+function crear_principal() {
     _html += '\
         <div class="flex principal-col">\n';
     if (data.imagen_content) {
@@ -299,16 +299,32 @@ function crear_imagen() {
     _html += '\
         </div>\n';
 
-    _css += id_section + ' .flex.principal-col{ \n\
+    if (data.bg_position == "full") {
+        _css += id_section + ' .flex.principal-col{ \n\
         position: relative;\n\
-        z-index: 1;\n} \n\
-' + id_section + ' .image{ \n\
-        padding-bottom: 30px; \n} \n\
-' + id_section + ' .image img{  \n\
-        max-width: 600px; \n} \n\
-' + id_section + ' .flex.principal-col > div{ \n}\n\
-' + id_section + ' .flex.principal-col > div:nth-child(1){ \n}\n\
-' + id_section + ' .flex.principal-col > div:nth-child(2){ \n}\n';
+        z-index: 1;\n} \n';
+    }
+    if (data.bg_position == "izquierda") {
+        _css += id_section + ' .flex.principal-col{ \n\
+        position: relative;\n\
+        width: 50%;\n\
+        margin-left: auto;\n\
+        z-index: 1;\n} \n';
+    }
+    if (data.bg_position == "derecha") {
+        _css += id_section + ' .flex.principal-col{ \n\
+        position: relative;\n\
+        width: 50%;\n\
+        z-index: 1;\n} \n';
+    }
+
+    _css += id_section + ' .image{ \n\
+        padding-bottom: 30px; \n} \n';
+    _css += id_section + ' .image img{  \n\
+        max-width: 600px; \n} \n';
+    _css += id_section + ' .flex.principal-col > div{ \n}\n';
+    _css += id_section + ' .flex.principal-col > div:nth-child(1){ \n}\n';
+    _css += id_section + ' .flex.principal-col > div:nth-child(2){ \n}\n';
 
     _mobile += id_section + ' .flex.principal-col{ } \n';
     _mobile += id_section + ' .flex.principal-col > div{ }\n';
@@ -357,6 +373,7 @@ function crear_titulares() {
         font-weight:600; \n\
         padding-bottom: 20px; \n\
         text-align:center; \n}\n';
+
         _css += id_section + ' .title:before{ \n\
         content: ""; \n}\n';
 

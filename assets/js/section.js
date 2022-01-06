@@ -116,8 +116,7 @@ function html_abrirSection() {
         padding-top: 100px;\n\
         padding-bottom: 100px;\n\
         position: relative;\n';
-    _css += '}\n' + id_section + ' .' + data.tipo_container + '{ \n\
-        }\n';
+    _css += '}\n' + id_section + ' .' + data.tipo_container + '{ \n}\n';
 
     //mobile
     _mobile += id_section + '{}\n';

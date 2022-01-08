@@ -11,30 +11,37 @@ $(function () {
     //mostrar o quitar el campo custom
     $('#tipo-ruta').on('change', function () {
         tipo_ruta = parseInt($(this).val());
-        //aplicar ruta de imagen, una imagen para todo
+        //aplicar ruta de imagen, una imagen para todo segun lo seleccionado
         switch (tipo_ruta) {
             case 1:
                 if ($('#webp').is(':checked')) {
-                    image_gral = "{{ 'assets/img/logo.svg'|theme|webp }}";
+                    image_gral = "{{ 'assets/img/imagen.jpg'|theme|webp }}";
+                    imagen_svg = '<img src="{{ \'assets/img/imagen.svg\'|theme }}" loading="lazy" width="100%" height="100%" alt="" />';
                 } else {
-                    image_gral = "{{ 'assets/img/logo.svg'|theme }}";
+                    image_gral = "{{ 'assets/img/imagen.jpg'|theme }}";
+                    imagen_svg = '<img src="' + image_gral + '" loading="lazy" width="100%" height="100%" alt="" />';
                 }
 
                 imagen = '<img src="' + image_gral + '" loading="lazy" width="100%" height="100%" alt="" />';
+
                 break;
             case 2:
-                image_gral = "assets/img/logo";
+                image_gral = "assets/img/imagen.jpg";
+
+                quitar_extension = image_gral.split('.');
 
                 if ($('#webp').is(':checked')) {
                     imagen = "\
                                 <picture>\n\
-                                    <source srcset=\"" + image_gral + ".webp\" type=\"image/webp\">\n\
-                                    <source srcset=\"" + image_gral + ".jpg\" type=\"image/jpg\">\n\
-                                    <img src=\"" + image_gral + ".jpg\"  loading=\"lazy\" width=\"100%\" height=\"100%\" alt=\"\">\n\
+                                    <source srcset=\"" + quitar_extension[0] + ".webp\" type=\"image/webp\">\n\
+                                    <source srcset=\"" + quitar_extension[0] + ".jpg\" type=\"image/jpg\">\n\
+                                    <img src=\"" + quitar_extension[0] + ".jpg\"  loading=\"lazy\" width=\"100%\" height=\"100%\" alt=\"\">\n\
                                 </picture>";
                 } else {
-                    imagen = '<img src="' + image_gral + '.jpg" loading="lazy" width="100%" height="100%" alt="" />';
+                    imagen = '<img src="' + quitar_extension[0] + '.jpg" loading="lazy" width="100%" height="100%" alt="" />';
                 }
+
+                imagen_svg = '<img src="' + quitar_extension[0] + '.svg" loading="lazy" width="100%" height="100%" alt="" />';
 
                 break;
             case 3:
@@ -52,6 +59,9 @@ $(function () {
                 } else {
                     imagen = '<img src="' + quitar_extension[0] + '.jpg" loading="lazy" width="100%" height="100%" alt="" />';
                 }
+
+                imagen_svg = '<img src="' + quitar_extension[0] + '.svg" loading="lazy" width="100%" height="100%" alt="" />';
+
                 break;
             default:
                 image_gral = "https://picsum.photos/seed/picsum/1800/1000";
@@ -66,6 +76,8 @@ $(function () {
                 } else {
                     imagen = '<img src="' + image_gral + '" loading="lazy" width="100%" height="100%" alt="" />';
                 }
+
+                imagen_svg = '<img src="' + image_gral + '" loading="lazy" width="100%" height="100%" alt="" />';
         }
 
 
@@ -135,18 +147,9 @@ function generarCodigo() {
     id_section = 'section#' + data.id_section;
 
     if (vista_previa) {
-        image_gral = "https://picsum.photos/seed/picsum/1800/1000";
+        imagen = '<img src="https://picsum.photos/seed/picsum/1800/1000" loading="lazy" width="100%" height="100%" alt="" />';
 
-        if ($('#webp').is(':checked')) {
-            imagen = "\
-                        <picture>\n\
-                            <source srcset=\"" + image_gral + ".webp\" type=\"image/webp\">\n\
-                            <source srcset=\"" + image_gral + "\" type=\"image/jpg\">\n\
-                            <img src=\"" + image_gral + "\"  loading=\"lazy\" width=\"100%\" height=\"100%\" alt=\"\">\n\
-                        </picture>";
-        } else {
-            imagen = '<img src="' + image_gral + '" loading="lazy" width="100%" height="100%" alt="" />';
-        }
+        imagen_svg = '<img src="assets/img/file_svg_icon_153410.svg" loading="lazy" width="100%" height="100%" alt="" />';
     } else {
         $('#tipo-ruta').trigger('change');
     }
@@ -240,103 +243,115 @@ function html_cerrarSection() {
 }
 
 function crear_principal() {
-    _html += '\
+    valid = validarPrincipal();
+
+    if (valid) {
+        _html += '\
         <div class="flex principal-col">\n';
-    if (data.imagen_content) {
-        if (data.pos_imagen == "center") {
-            _html += '\
+        if (data.imagen_content) {
+            if (data.pos_imagen == "center") {
+                _html += '\
             <div class="wow fadeIn">\n';
-            crear_titulares();
-            _html += '\
+                crear_titulares();
+                _html += '\
                 <div class="image">\n\
                     ' + imagen + '\n\
                 </div>\n\
             </div>\n';
 
-            _css += id_section + ' .image{ \n\
+                _css += id_section + ' .image{ \n\
                 text-align: center; \n\
                 padding-bottom: 30px; \n} \n\
                 ' + id_section + ' .image img{ \n\
                 max-width: 600px; \n}';
 
-            _mobile += id_section + ' .image{ } \n\
+                _mobile += id_section + ' .image{ } \n\
                 ' + id_section + ' .image img{ }';
-        }
-        if (data.pos_imagen == "left") {
-            _html += '\
+            }
+            if (data.pos_imagen == "left") {
+                _html += '\
                 <div class="wow fadeInLeft">\n\
                     <div class="image">\n\
                         ' + imagen + '\n\
                     </div>\n\
                 </div>\n';
-            _html += '\
+                _html += '\
                 <div class="wow fadeInRight">\n';
-            crear_titulares();
-            _html += '\
+                crear_titulares();
+                _html += '\
                 </div>\n';
-        }
-        if (data.pos_imagen == "right") {
-            _html += '\
+            }
+            if (data.pos_imagen == "right") {
+                _html += '\
             <div class="wow fadeInLeft">\n';
-            crear_titulares();
-            _html += '\
+                crear_titulares();
+                _html += '\
             </div>\n';
-            _html += '\
+                _html += '\
             <div class="wow fadeInRight">\n\
                 <div class="image">\n\
                     ' + imagen + '\n\
                 </div>\n\
             </div>\n';
-        }
-    } else {
-        _html += '\
+            }
+        } else {
+            _html += '\
             <div class="wow fadeIn">\n';
-        crear_titulares();
-        _html += '\
+            crear_titulares();
+            _html += '\
             </div>\n';
-    }
+        }
 
-    _html += '\
+        _html += '\
         </div>\n';
 
-    if (data.bg_position == "full") {
-        _css += id_section + ' .flex.principal-col{ \n\
+        if (data.bg_position == "full") {
+            _css += id_section + ' .flex.principal-col{ \n\
         position: relative;\n\
         z-index: 1;\n} \n';
-    }
-    if (data.bg_position == "izquierda" && data.bg) {
-        _css += id_section + ' .flex.principal-col{ \n\
+        }
+        if (data.bg_position == "izquierda" && data.bg) {
+            _css += id_section + ' .flex.principal-col{ \n\
         position: relative;\n\
         width: 50%;\n\
         margin-left: auto;\n\
         z-index: 1;\n} \n';
-    }
-    if (data.bg_position == "derecha" && data.bg) {
-        _css += id_section + ' .flex.principal-col{ \n\
+        }
+        if (data.bg_position == "derecha" && data.bg) {
+            _css += id_section + ' .flex.principal-col{ \n\
         position: relative;\n\
         width: 50%;\n\
         z-index: 1;\n} \n';
-    }
+        }
 
-    _css += id_section + ' .image{ \n\
+        _css += id_section + ' .image{ \n\
         padding-bottom: 30px; \n} \n';
-    _css += id_section + ' .image img{  \n\
+        _css += id_section + ' .image img{  \n\
         max-width: 600px; \n} \n';
-    _css += id_section + ' .flex.principal-col > div{ \n}\n';
-    _css += id_section + ' .flex.principal-col > div:nth-child(1){ \n}\n';
-    _css += id_section + ' .flex.principal-col > div:nth-child(2){ \n}\n';
+        _css += id_section + ' .flex.principal-col > div{ \n}\n';
+        _css += id_section + ' .flex.principal-col > div:nth-child(1){ \n}\n';
+        _css += id_section + ' .flex.principal-col > div:nth-child(2){ \n}\n';
 
-    _mobile += id_section + ' .flex.principal-col{ } \n';
-    _mobile += id_section + ' .flex.principal-col > div{ }\n';
-    _mobile += id_section + ' .flex.principal-col > div:nth-child(1){ }\n';
-    _mobile += id_section + ' .flex.principal-col > div:nth-child(2){ }\n';
+        _mobile += id_section + ' .flex.principal-col{ } \n';
+        _mobile += id_section + ' .flex.principal-col > div{ }\n';
+        _mobile += id_section + ' .flex.principal-col > div:nth-child(1){ }\n';
+        _mobile += id_section + ' .flex.principal-col > div:nth-child(2){ }\n';
+    }
+}
+
+function validarPrincipal() {
+    valid = false;
+    if (data.sup_icon || data.sup_titulo || data.titulo || data.subtitulo || data.texto || data.btn) {
+        valid = true;
+    }
+    return valid;
 }
 
 function crear_titulares() {
     if (data.sup_icon) {
         _html += '\
                 <div class="icon">\n\
-                    ' + imagen + '\n\
+                    ' + imagen_svg + '\n\
                 </div>\n';
 
         _css += id_section + ' .icon{ \n\
@@ -432,7 +447,8 @@ function crear_flex() {
         _html += '\
         <div class="items-' + data.id_section + ' flex t-col-' + data.columnas_flex + '">\n';
 
-        _css += id_section + ' .items-' + data.id_section + '{ \n}\n';
+        _css += id_section + ' .items-' + data.id_section + '{ \n\
+        text-align: center; \n\}\n';
         _css += id_section + ' .items-' + data.id_section + ' .item{\n}\n';
         _css += id_section + ' .items-' + data.id_section + ' .bg{ \n\
         background-color: ' + data.bg_flex + ' \n}\n';
@@ -449,7 +465,7 @@ function crear_flex() {
             if (data.icono_flex) {
                 _html += '\
                     <div class="icono_flex">\n\
-                        ' + imagen + '\n\
+                        ' + imagen_svg + '\n\
                     </div>\n';
 
                 if (index == 1) {

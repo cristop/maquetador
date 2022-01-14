@@ -174,19 +174,7 @@ function html_abrirSection() {
         style = ' style="background-image: url(\'' + image_gral + '\')"';
     }*/
     //html
-    _html += '<section id="' + data.id_section + '" class="section wow fadeIn ' + data.bg_color + ' ' + data.c_base + '"' + style + '> \n\
-    <div class="'+ data.tipo_container + '" >\n';
-
-    //css
-    _css += id_section + '{\n\
-        padding-top: 50px;\n\
-        padding-bottom: 50px;\n\
-        position: relative;\n';
-    _css += '}\n' + id_section + ' .' + data.tipo_container + '{ \n}\n';
-
-    //mobile
-    _mobile += id_section + '{}\n';
-    _mobile += id_section + ' .' + data.tipo_container + '{}\n';
+    _html += '<section id="' + data.id_section + '" class="section wow fadeIn ' + data.bg_color + ' ' + data.c_base + '"' + style + '> \n';
 
     if (data.bg) {
         _html += '\
@@ -234,6 +222,21 @@ function html_abrirSection() {
         _mobile += id_section + ' .bg-image{}\n';
         _mobile += id_section + ' .bg-image img{}\n';
     }
+    _html += '\
+    <div class="' + data.tipo_container + '" >\n';
+
+    //css
+    _css += id_section + '{\n\
+        padding-top: 50px;\n\
+        padding-bottom: 50px;\n\
+        position: relative;\n';
+    _css += '}\n' + id_section + ' .' + data.tipo_container + '{ \n}\n';
+
+    //mobile
+    _mobile += id_section + '{}\n';
+    _mobile += id_section + ' .' + data.tipo_container + '{}\n';
+
+
 }
 
 function html_cerrarSection() {

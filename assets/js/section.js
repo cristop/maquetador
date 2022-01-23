@@ -5,6 +5,7 @@ var data = "";
 var id_section = "";
 var tipo_ruta = "";
 var image_gral = "";
+var before = "";
 var vista_previa = false;
 
 $(function () {
@@ -14,6 +15,11 @@ $(function () {
         //aplicar ruta de imagen, una imagen para todo segun lo seleccionado
         switch (tipo_ruta) {
             case 1:
+                //esto lo usamos para marcar el checkbox webp, si es la primera vez que se selecciona este tipo
+                if (before != tipo_ruta) {
+                    $('#webp').prop("checked", true);
+                }
+
                 if ($('#webp').is(':checked')) {
                     image_gral = "{{ 'assets/img/imagen.jpg'|theme|webp }}";
                     imagen_svg = '<img src="{{ \'assets/img/imagen.svg\'|theme }}" loading="lazy" width="100%" height="100%" alt="" />';
@@ -26,6 +32,11 @@ $(function () {
 
                 break;
             case 2:
+                //esto lo usamos para marcar el checkbox webp, si es la primera vez que se selecciona este tipo
+                if (before != tipo_ruta) {
+                    $('#webp').prop("checked", true);
+                }
+
                 image_gral = "assets/img/imagen.jpg";
 
                 quitar_extension = image_gral.split('.');
@@ -45,6 +56,12 @@ $(function () {
 
                 break;
             case 3:
+                //esto lo usamos para desmarcar el checkbox webp, si es la primera vez que se selecciona el tipo "custom"
+                if (before != tipo_ruta) {
+                    $('#webp').prop("checked", false);
+                }
+
+                //armamos la ruta
                 image_gral = $('#ruta-custom').val();
 
                 quitar_extension = image_gral.split('.');
@@ -64,6 +81,11 @@ $(function () {
 
                 break;
             default:
+                //esto lo usamos para marcar el checkbox webp, si es la primera vez que se selecciona este tipo
+                if (before != tipo_ruta) {
+                    $('#webp').prop("checked", true);
+                }
+
                 image_gral = "https://picsum.photos/seed/picsum/1800/1000";
 
                 if ($('#webp').is(':checked')) {
@@ -93,6 +115,9 @@ $(function () {
         } else {
             $('#webp_text').text('');
         }
+
+        //Para saber cual fue la anterior opcion seleccionada
+        before = tipo_ruta;
     });
     //aca solo informacion para mostrar si el webp está marcado
     $('#tipo-ruta').trigger('change');
@@ -178,9 +203,9 @@ function html_abrirSection() {
 
     if (data.bg) {
         _html += '\
-        <div class="bg-image">\n\
-            ' + imagen + '\n\
-        </div>\n';
+    <div class="bg-image">\n\
+        ' + imagen + '\n\
+    </div>\n';
 
         _css += id_section + ' .bg-image img{\n\
         display: block;\n\
@@ -361,6 +386,7 @@ function crear_titulares() {
         text-align:center \n}\n';
         _css += id_section + ' .icon img{ \n\
         height: 60px; \n\
+        width: auto; \n\
         object-fit: contain; \n}\n';
 
         _mobile += id_section + ' .icon{}\n';

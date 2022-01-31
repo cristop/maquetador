@@ -39,7 +39,10 @@ label {
 }
 
 input[type="checkbox"] {
-    transform: scale(2)
+    transform: scale(2);
+    height: 27px;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 input[type="text"],

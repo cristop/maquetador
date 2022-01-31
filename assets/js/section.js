@@ -194,12 +194,10 @@ function generarCodigo() {
 }
 
 function html_abrirSection() {
-    var style = "";
-    /*if (data.bg) {
-        style = ' style="background-image: url(\'' + image_gral + '\')"';
-    }*/
+
+    /**** COMIENZA EL SECTION !!! ***/
     //html
-    _html += '<section id="' + data.id_section + '" class="section wow fadeIn ' + data.bg_color + ' ' + data.c_base + '"' + style + '> \n';
+    _html += '<section id="' + data.id_section + '" class="section wow fadeIn ' + data.bg_color + ' ' + data.c_base + '"> \n';
 
     if (data.bg) {
         _html += '\
@@ -224,6 +222,7 @@ function html_abrirSection() {
         left: 0;\n\
         top: 0;\n\
         z-index: 0;\n}\n';
+            _mobile += id_section + ' .bg-image{}\n';
         }
         if (data.bg_position == "izquierda") {
             _css += id_section + ' .bg-image{\n\
@@ -233,6 +232,9 @@ function html_abrirSection() {
         left: 0;\n\
         top: 0;\n\
         z-index: 0;\n}\n';
+            _mobile += id_section + ' .bg-image{\n\
+        left: 0;\n\
+        width: 100%; \n} \n';
         }
         if (data.bg_position == "derecha") {
             _css += id_section + ' .bg-image{\n\
@@ -242,9 +244,11 @@ function html_abrirSection() {
         left: 50%;\n\
         top: 0;\n\
         z-index: 0;\n}\n';
+            _mobile += id_section + ' .bg-image{\n\
+        left: 0;\n\
+        width: 100%; \n} \n';
         }
 
-        _mobile += id_section + ' .bg-image{}\n';
         _mobile += id_section + ' .bg-image img{}\n';
     }
     _html += '\
@@ -255,13 +259,36 @@ function html_abrirSection() {
         padding-top: 50px;\n\
         padding-bottom: 50px;\n\
         position: relative;\n';
+
+    if (data.full_height) {
+        _css += '\
+        height: 100vh;\n\
+        display: flex;\n\
+        align-items: center;\n';
+    }
+
+    if (data.hexa_fondo) {
+        _css += '\
+        background-color: '+ data.hexa_fondo + ';\n';
+    }
+
+    if (data.hexa_letra) {
+        _css += '\
+        color: '+ data.hexa_letra + ';\n';
+    }
+
     _css += '}\n' + id_section + ' .' + data.tipo_container + '{ \n}\n';
 
+
     //mobile
-    _mobile += id_section + '{}\n';
+    if (data.full_height) {
+        _mobile += id_section + '{\n\
+    height: auto;\n\
+    display: block;\n}\n';
+    } else {
+        _mobile += id_section + '{}\n';
+    }
     _mobile += id_section + ' .' + data.tipo_container + '{}\n';
-
-
 }
 
 function html_cerrarSection() {
@@ -274,8 +301,12 @@ function crear_principal() {
     valid = validarPrincipal();
 
     if (valid) {
-        _html += '\
+        //abre el flex principal si tiene imagen de fondo
+        if (data.bg) {
+            _html += '\
         <div class="flex principal-col">\n';
+        }
+
         if (data.imagen_content) {
             if (data.pos_imagen == "center") {
                 _html += '\
@@ -330,13 +361,18 @@ function crear_principal() {
             </div>\n';
         }
 
-        _html += '\
+        //cierra el flex principal si tiene imagen de fondo
+        if (data.bg) {
+            _html += '\
         </div>\n';
+        }
 
-        if (data.bg_position == "full") {
+        //ESTILOS SEGUN POSICION DE IMAGEN ELEGIDA
+        if (data.bg_position == "full" && data.bg) {
             _css += id_section + ' .flex.principal-col{ \n\
         position: relative;\n\
         z-index: 1;\n} \n';
+            _mobile += id_section + ' .flex.principal-col{ } \n';
         }
         if (data.bg_position == "izquierda" && data.bg) {
             _css += id_section + ' .flex.principal-col{ \n\
@@ -344,26 +380,53 @@ function crear_principal() {
         width: 50%;\n\
         margin-left: auto;\n\
         z-index: 1;\n} \n';
+            _mobile += id_section + ' .flex.principal-col{\n\
+        width: 100%;\n} \n';
         }
         if (data.bg_position == "derecha" && data.bg) {
             _css += id_section + ' .flex.principal-col{ \n\
         position: relative;\n\
         width: 50%;\n\
         z-index: 1;\n} \n';
+            _mobile += id_section + ' .flex.principal-col{\n\
+        width: 100%;\n} \n';
         }
 
-        _css += id_section + ' .image{ \n\
+        //estilos para cuando tiene una imagen, no de fondo
+        if (data.imagen_content && data.pos_imagen != "center") {
+            _css += id_section + ' .container{\n\
+        display: flex;\n\
+        align-items: center;\n}\n';
+            _css += id_section + ' .container > div{\n\
+        width: 100%;\n}\n';
+            _mobile += id_section + ' .container{\n\
+        display: block;\n}\n';
+            _mobile += id_section + ' .container > div{}\n';
+        }
+        if (data.imagen_content) {
+            _css += id_section + ' .image{ \n\
         padding-bottom: 30px; \n} \n';
-        _css += id_section + ' .image img{  \n\
+            _mobile += id_section + ' .image{} \n';
+        }
+        if (data.imagen_content && data.pos_imagen == "center") {
+            _css += id_section + ' .image img{  \n\
         max-width: 600px; \n} \n';
-        _css += id_section + ' .flex.principal-col > div{ \n}\n';
-        _css += id_section + ' .flex.principal-col > div:nth-child(1){ \n}\n';
-        _css += id_section + ' .flex.principal-col > div:nth-child(2){ \n}\n';
+            _mobile += id_section + ' .image img{} \n';
+        }
+        if (data.imagen_content && data.pos_imagen != "center") {
+            _css += id_section + ' .image img{\n} \n';
+            _mobile += id_section + ' .image img{} \n';
+        }
+        //estilos a flex principal si tiene imagen de fondo
+        if (data.bg) {
+            _css += id_section + ' .flex.principal-col > div{ \n}\n';
+            _css += id_section + ' .flex.principal-col > div:nth-child(1){ \n}\n';
+            _css += id_section + ' .flex.principal-col > div:nth-child(2){ \n}\n';
 
-        _mobile += id_section + ' .flex.principal-col{ } \n';
-        _mobile += id_section + ' .flex.principal-col > div{ }\n';
-        _mobile += id_section + ' .flex.principal-col > div:nth-child(1){ }\n';
-        _mobile += id_section + ' .flex.principal-col > div:nth-child(2){ }\n';
+            _mobile += id_section + ' .flex.principal-col > div{ }\n';
+            _mobile += id_section + ' .flex.principal-col > div:nth-child(1){ }\n';
+            _mobile += id_section + ' .flex.principal-col > div:nth-child(2){ }\n';
+        }
     }
 }
 
@@ -421,7 +484,7 @@ function crear_titulares() {
         _css += id_section + ' .title:before{ \n\
         content: ""; \n}\n';
 
-        _mobile += id_section + ' .title{}';
+        _mobile += id_section + ' .title{}\n';
     }
 
     if (data.subtitulo) {
@@ -504,6 +567,7 @@ function crear_flex() {
 
                     _css += id_section + ' .items-' + data.id_section + ' .icono_flex img{ \n\
         height: 60px; \n\
+        width: auto; \n\
         object-fit: contain \n}\n';
 
                     _mobile += id_section + ' .items-' + data.id_section + ' .icono_flex{}\n';
@@ -582,7 +646,7 @@ function crear_flex() {
         font-size: 0.7rem; \n\
         padding-bottom: 10px \n}\n';
 
-                    _mobile += id_section + ' .items-' + data.id_section + ' .texto_flex{}';
+                    _mobile += id_section + ' .items-' + data.id_section + ' .texto_flex{}\n';
                 }
             }
             if (data.btn_flex) {

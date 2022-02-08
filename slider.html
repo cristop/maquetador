@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLIDERS</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/booster.min.css" />
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center">GENERADOR DE SLIDERS</h1>
+        <h5 class="text-center">by Cristo</h5>
+
+        <div class="text-center">
+            Tipo de ruta para imagenes &nbsp;
+            <select name="tipo-ruta" id="tipo-ruta" style="width: auto; display: inline-block;">
+                <option value="1">October cms</option>
+                <option value="2">HTML</option>
+                <option value="3">Custom</option>
+                <option value="4">Picsum</option>
+            </select>
+            <div class="custom-contain" style="display: none;">
+                &nbsp;&nbsp;Escribe la ruta custom &nbsp;&nbsp;<input type="text" id="ruta-custom" name="ruta-custom"
+                    value="assets/img/imagen.jpg" style="width: auto; display: inline-block;" />
+            </div>
+            <label class="webp-contain" style="width: fit-content; margin: auto">
+                <br>
+                <input type="checkbox" name="webp" id="webp" checked /> &nbsp;&nbsp;Agregar webp
+            </label>
+        </div>
+
+        <form id="generar-section">
+            <div class="flex sticky">
+                <div style="position: absolute; right: 0; padding-top: 23px; width: auto; z-index:1;">
+                    Formato de ruta imagen: <strong id="formato-ruta-imagen"></strong><span style="color:blue;"
+                        id="webp_text"></span>
+                </div>
+                <div>
+                    <button data-href="#vista_previa" class="modal-link vista_previa_btn btn btn-primary">VISTA
+                        PREVIA</button>
+                    <input type="submit" value="GENERAR" class="btn btn-secondary">
+                    <input type="reset" value="LIMPIAR" class="btn btn-secondary">
+                </div>
+            </div>
+            <h2>Armado de Section</h2>
+            <div class="flex">
+                <div>
+                    <label for="">ID Section (sin #)</label>
+                    <input type="text" name="id_section" id="id_section" required>
+                </div>
+                <div>
+                    <label for="">Libreria</label>
+                    <select name="libreria" id="libreria">
+                        <option value="OwlCarousel2-2.3.4">OwlCarousel2-2.3.4</option>
+                        <option value="jquery.cycle2">jquery.cycle2</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <hr>
+            </div>
+
+            <div>
+                <h2>Opciones</h2>
+            </div>
+
+            <div class="flex">
+                <div>
+                    <label for="">Loop</label>
+                    <select name="loop" id="loop">
+                        <option value="true">true</option>
+                        <option value="false">false</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="">Margin</label>
+                    <input type="number" id="margin" name="margin" value="10" />
+                </div>
+                <div>
+                    <label for="">Flechitas</label>
+                    <select name="nav" id="nav">
+                        <option value="true">true</option>
+                        <option value="false">false</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="">Items para mostrar</label>
+                    <select name="items" id="items">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4" selected>4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="flex">
+                <div>
+                    <button data-href="#vista_previa" class="modal-link vista_previa_btn btn btn-primary">VISTA
+                        PREVIA</button>
+                    <input type="submit" value="GENERAR" class="btn btn-secondary">
+                    <input type="reset" value="LIMPIAR" class="btn btn-secondary">
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="container" id="resultados">
+        <br><br><br>
+        <h2>RESULTADOS: </h2>
+        <div class="flex">
+            <div>
+                <a href="assets/rar/OwlCarousel2-2.3.4.rar">Descargar libreria</a> <br>
+            </div>
+        </div>
+
+        <div class="flex">
+            <div>
+                <label for="">Library</label>
+                <textarea name="res-library" id="res-library" cols="10" rows="20" style="height: 80px"
+                    readonly></textarea>
+            </div>
+        </div>
+        <div class="flex">
+            <div>
+                <label for="">HTML</label>
+                <textarea name="res-html" id="res-html" cols="30" rows="20" readonly></textarea>
+            </div>
+            <div>
+                <label for="">CSS</label>
+                <textarea name="res-css" id="res-css" cols="30" rows="20" readonly></textarea>
+            </div>
+            <div>
+                <label for="">Jquery</label>
+                <textarea name="res-jquery" id="res-jquery" cols="30" rows="20" readonly></textarea>
+            </div>
+        </div>
+
+        <div class="flex">
+            <div>
+                <label for="">API:</label>
+                <a href="https://owlcarousel2.github.io/OwlCarousel2/docs/api-options.html"
+                    target="_blank">https://owlcarousel2.github.io/OwlCarousel2/docs/api-options.html</a>
+
+            </div>
+        </div>
+
+        <br><br><br><br>
+    </div>
+
+
+
+    <div id="vista_previa" class="modal">
+        <div id="previa_css"></div>
+        <div id="previa_html"></div>
+        <div class="panel">
+            <button id="cerrar-modal" class="btn btn-secondary">CERRAR</button>
+            <button id="generar-codigo-modal" class="btn btn-primary">GENERAR CÓDIGO</button>
+        </div>
+    </div>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+
+    <script src="assets/js/section.js"></script>
+
+    <!-- Librarys -->
+    <script src="assets/library/modal/modal.js"></script>
+</body>
+
+</html>

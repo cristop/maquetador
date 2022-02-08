@@ -319,13 +319,13 @@ function crear_principal() {
             </div>\n';
 
                 _css += id_section + ' .image{ \n\
-                text-align: center; \n\
-                padding-bottom: 30px; \n} \n\
-                ' + id_section + ' .image img{ \n\
-                max-width: 600px; \n}';
+        text-align: center; \n\
+        padding-bottom: 30px; \n} \n';
+                _css += id_section + ' .image img{ \n\
+        max-width: 600px; \n}\n';
 
-                _mobile += id_section + ' .image{ } \n\
-                ' + id_section + ' .image img{ }';
+                _mobile += id_section + ' .image{ } \n';
+                _mobile += id_section + ' .image img{ }\n';
             }
             if (data.pos_imagen == "left") {
                 _html += '\
@@ -432,7 +432,7 @@ function crear_principal() {
 
 function validarPrincipal() {
     valid = false;
-    if (data.sup_icon || data.sup_titulo || data.titulo || data.subtitulo || data.texto || data.btn) {
+    if (data.sup_icon || data.sup_titulo || data.titulo || data.subtitulo || data.texto || data.btn || data.imagen_content) {
         valid = true;
     }
     return valid;

@@ -432,7 +432,7 @@ function crear_principal() {
 
 function validarPrincipal() {
     valid = false;
-    if (data.sup_icon || data.sup_titulo || data.titulo || data.subtitulo || data.texto || data.btn || data.imagen_content) {
+    if (data.sup_icon || data.sup_titulo || data.titulo || data.subtitulo || data.texto || data.btn || data.imagen_content || data.formulario) {
         valid = true;
     }
     return valid;
@@ -514,6 +514,8 @@ function crear_titulares() {
 
         _mobile += id_section + ' .text{}';
     }
+
+    crear_form();
 
     if (data.btn) {
         _html += '\
@@ -670,6 +672,110 @@ function crear_flex() {
 
         _html += '\
         </div>\n';
+    }
+}
+
+function crear_form() {
+    if (data.formulario) {
+        _html += '\
+                <div class="form">\n';
+
+
+        var name_form = 1;
+
+        for (let row = 0; row < data.row_form; row++) {
+            _html += '\
+                    <div class="flex">\n';
+            for (let cols = 0; cols < data.col_form; cols++) {
+
+                _html += '\
+                        <div>\n';
+
+                if (data.label_form) {
+                    _html += '\
+                            <label>nombre_campo_'+ name_form + '</label>\n';
+                }
+
+                _html += '\
+                            <input type="text" name="nombre_campo_'+ name_form + '" id="nombre_campo_' + name_form + '" ';
+
+                if (data.placeholder_form) {
+                    _html += 'placeholder="nombre_campo_' + name_form + '" ';
+                }
+
+                _html += '/>\n\
+                        </div> \n';
+                name_form++;
+            }
+            _html += '\
+                    </div>\n';
+        }
+
+        if (data.textarea_form) {
+            _html += '\
+                    <div class="flex">\n\
+                        <div>\n';
+            if (data.label_form) {
+                _html += '\
+                            <label>nombre_campo_'+ name_form + '</label>\n';
+            }
+            _html += '\
+                            <textarea name="nombre_campo_'+ name_form + '" id="nombre_campo_' + name_form + '" cols="30" rows="10"';
+
+            if (data.placeholder_form) {
+                _html += 'placeholder="nombre_campo_' + name_form + '" ';
+            }
+
+            _html += '></textarea>\n\
+                        </div>\n\
+                    </div>\n';
+        }
+
+        if (data.cond_form) {
+            _html += '\
+                    <div class="flex">\n\
+                        <div class="condiciones">\n\
+                            <label class="custom-checkbox"><input type="checkbox" id="condiciones" name="condiciones"><span></span> Aceptar condiciones?</label> \n\
+                        </div>\n\
+                    </div>\n';
+        }
+
+        _html += '\
+                    <div class="flex">\n\
+                        <div class="text-center">\n\
+                            <input type="submit" class="btn" value="Enviar">\n\
+                        </div>\n\
+                    </div>\n';
+
+        _html += '\
+                </div>\n';
+
+
+        _css += id_section + ' .form{}\n';
+        _css += id_section + ' .form .flex{}\n';
+        _css += id_section + ' .form .flex > div{}\n';
+        _css += id_section + ' .form .flex label{ padding-bottom: 10px; }\n';
+        _css += id_section + ' .form .flex input{}\n';
+        _css += id_section + ' .form .flex .btn{}\n';
+        if (data.textarea_form) {
+            _css += id_section + ' .form .flex textarea{}\n';
+        }
+        if (data.cond_form) {
+            _css += id_section + ' .form .flex .condiciones{}\n';
+        }
+
+        _mobile += id_section + ' .form{}\n';
+        _mobile += id_section + ' .form .flex{}\n';
+        _mobile += id_section + ' .form .flex > div{ width: 100% }\n';
+        _mobile += id_section + ' .form .flex label{}\n';
+        _mobile += id_section + ' .form .flex input{}\n';
+        _mobile += id_section + ' .form .flex .btn{}\n';
+        if (data.textarea_form) {
+            _mobile += id_section + ' .form .flex textarea{}\n';
+        }
+        if (data.cond_form) {
+            _mobile += id_section + ' .form .flex .condiciones{}\n';
+        }
     }
 }
 

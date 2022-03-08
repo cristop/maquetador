@@ -592,19 +592,36 @@ function crear_flex() {
                 }
 
                 if (index == 1) {
-                    _css += id_section + ' .items-' + data.id_section + ' .imagen_flex{ \n}\n';
+                    _css += id_section + ' .items-' + data.id_section + ' .imagen_flex{ \n\
+        height: 0;\n\
+        overflow: hidden;\n\
+        position: relative;\n\
+        padding-bottom: 60%;\n}\n';
 
                     if (data.imagen_link_flex) {
                         _css += id_section + ' .items-' + data.id_section + ' .imagen_flex a{ \n\
-        display:block; \n}\n';
+        display:block; \n\
+        width: 100%;\n\
+        height: 100%;\n\
+        position: absolute;\n\
+        left: 0;\n\
+        top: 0;\n}\n';
                         _css += id_section + ' .items-' + data.id_section + ' .imagen_flex a:hover{ \n\
         filter: brightness(0.7) \n}\n';
-                    }
+                        _css += id_section + ' .items-' + data.id_section + ' .imagen_flex img{ \n\
+        height: 100%;\n\
+        object-fit: cover;\n\
+        width: 100%;\n}\n';
+                    } else {
 
-                    _css += id_section + ' .items-' + data.id_section + ' .imagen_flex img{ \n\
-        height: 280px; \n\
-        object-fit: cover; \n\
-        width: 100% \n}\n';
+                        _css += id_section + ' .items-' + data.id_section + ' .imagen_flex img{ \n\
+        height: 100%;\n\
+        object-fit: cover;\n\
+        width: 100%;\n\
+        position: absolute;\n\
+        left: 0;\n\
+        top: 0;\n}\n';
+                    }
 
                     _mobile += id_section + ' .items-' + data.id_section + ' .imagen_flex{}\n';
                     _mobile += id_section + ' .items-' + data.id_section + ' .imagen_flex img{}\n';
